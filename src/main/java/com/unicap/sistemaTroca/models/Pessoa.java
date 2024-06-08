@@ -15,10 +15,14 @@ public class Pessoa extends Usuario {
     private String cpf;
 
     @Column(unique = false, nullable = true)
+    private String sobrenome;
+
+    @Column(unique = false, nullable = true)
     private String dataDeNascimento;
 
     public Pessoa(PessoaDto pessoaDto) {
         super(pessoaDto.nome(), pessoaDto.email(), pessoaDto.senha(), pessoaDto.celular(), pessoaDto.endereco());
+        this.sobrenome = pessoaDto.sobrenome();
         this.cpf = pessoaDto.cpf();
         this.dataDeNascimento = pessoaDto.dataDeNascimento();
     }

@@ -4,16 +4,15 @@ import com.unicap.sistemaTroca.dto.OngDto;
 import com.unicap.sistemaTroca.exceptions.BancoDeDadosException;
 import com.unicap.sistemaTroca.models.Ong;
 import com.unicap.sistemaTroca.models.Usuario;
+import com.unicap.sistemaTroca.services.OngServico;
 import com.unicap.sistemaTroca.services.UsuarioServico;
 import com.unicap.sistemaTroca.utils.BCryptPassword;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
@@ -22,11 +21,15 @@ public class OngController {
 
     private UsuarioServico usuarioServico;
 
-    public OngController(UsuarioServico usuarioServico) {
+    private OngServico ongServico;
+
+    @Autowired
+    public OngController(UsuarioServico usuarioServico, OngServico ongServico) {
         this.usuarioServico = usuarioServico;
+        this.ongServico = ongServico;
     }
 
-    @PostMapping(value = "/criar")
+    @PostMapping
     @Transactional
     public ResponseEntity<Usuario> criarOng(@RequestBody @Valid OngDto ongDto) {
 
@@ -45,5 +48,19 @@ public class OngController {
         }catch (DataIntegrityViolationException e) {
             throw new BancoDeDadosException("Campo(s) único(s) já existente(s) no banco de dados");
         }
+    }
+
+    @PutMapping(value = "/{id}")
+    @Transactional
+    public ResponseEntity<Ong> atualizarDadosOng(@PathVariable Long id, @RequestBody OngDto ongDto) {
+        var ong = new Ong(ongDto);
+
+        if(ong.getSenha() != null) {
+            ong.setSenha(BCryptPassword.criptografarPassword(ong));
+        }
+
+        var ongAtualizado = ongServico.atualizarOng(id, ong);
+
+        return ResponseEntity.ok().body(ongAtualizado);
     }
 }

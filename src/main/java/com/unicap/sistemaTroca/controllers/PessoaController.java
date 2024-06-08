@@ -29,7 +29,7 @@ public class PessoaController {
         this.usuarioServico = usuarioServico;
     }
 
-    @PostMapping(value = "/criar")
+    @PostMapping
     @Transactional
     public ResponseEntity<Usuario> criarPessoa(@RequestBody @Valid PessoaDto pessoaDto) {
 
@@ -54,6 +54,10 @@ public class PessoaController {
     @Transactional
     public ResponseEntity<Usuario> atualizarDadosPessoa(@PathVariable Long id, @RequestBody @Valid PessoaDto pessoaDto) {
         Pessoa obj = new Pessoa(pessoaDto);
+
+        if(obj.getSenha() != null) {
+            obj.setSenha(BCryptPassword.criptografarPassword(obj));
+        }
 
         Usuario usuario = pessoaServico.atualizarPessoa(id, obj);
 

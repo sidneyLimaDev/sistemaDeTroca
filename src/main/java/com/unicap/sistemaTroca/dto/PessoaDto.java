@@ -11,6 +11,9 @@ public record PessoaDto(
         String nome,
 
         @NotBlank
+        String sobrenome,
+
+        @NotBlank
         @Email
         String email,
 
@@ -30,6 +33,7 @@ public record PessoaDto(
         String cpf,
 
         @NotBlank
+        @Pattern(regexp = "\\d{2}-\\d{2}-\\d{4}", message = "A data deve está no seguinte padrão (dd-MM-aaaa")
         String dataDeNascimento
 ) {
 

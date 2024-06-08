@@ -22,7 +22,12 @@ public record AnuncioDto(
         EstadoProduto estadoProduto,
 
         @NotBlank
-        Double preco
+        Double preco,
+
+        String categoria,
+
+        @NotBlank
+        String nome
 
 ) {
 }

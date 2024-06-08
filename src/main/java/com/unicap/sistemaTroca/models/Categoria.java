@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Data
@@ -20,12 +21,12 @@ public class Categoria implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = false, nullable = false)
+    @Column(unique = true, nullable = false)
     private String nome;
 
-    @OneToOne(mappedBy = "categoria")
+    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
     @JsonIgnore
-    private Anuncio anuncio;
+    private List<Anuncio> anuncios;
 
     public Categoria(Long id, String nome) {
         this.id = id;

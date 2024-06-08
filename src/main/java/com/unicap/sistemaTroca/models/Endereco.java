@@ -24,19 +24,16 @@ public class Endereco implements Serializable {
     private String cep;
 
     @Column(unique = false, nullable = true)
-    private String rua;
+    private String logradouro;
 
     @Column(unique = false, nullable = true)
     private String bairro;
 
     @Column(unique = false, nullable = true)
-    private String cidade;
+    private String localidade;
 
     @Column(unique = false, nullable = true)
-    private String estado;
-
-    @Column(unique = false, nullable = true)
-    private String pais;
+    private String uf;
 
     @Column(unique = false, nullable = true)
     private Integer numero;
@@ -47,11 +44,10 @@ public class Endereco implements Serializable {
 
     public Endereco(EnderecoDto enderecoDto) {
         cep = enderecoDto.cep();
-        rua = enderecoDto.rua();
+        logradouro = enderecoDto.logradouro();
         bairro = enderecoDto.bairro();
-        cidade = enderecoDto.cidade();
-        estado = enderecoDto.estado();
-        pais = enderecoDto.pais();
+        localidade = enderecoDto.localidade();
+        uf = enderecoDto.uf();
         numero = enderecoDto.numero();
     }
 }

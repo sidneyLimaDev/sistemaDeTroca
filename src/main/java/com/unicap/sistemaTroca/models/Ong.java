@@ -16,8 +16,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Ong extends Usuario {
 
-    private static final long serialVersionUID = 1L;
-
     @Column(unique = true, nullable = true)
     private String cnpj;
 

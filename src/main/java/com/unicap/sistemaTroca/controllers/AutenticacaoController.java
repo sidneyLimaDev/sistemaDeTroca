@@ -30,13 +30,9 @@ public class AutenticacaoController {
 
     @PostMapping(value = "/login")
     public ResponseEntity login(@RequestBody @Valid UsuarioAutenticacaoDto usuarioAutenticacaoDto) {
-        System.out.println("antes de gerar o usuario");
         var usuarioEmailSenha = new UsernamePasswordAuthenticationToken(usuarioAutenticacaoDto.email(), usuarioAutenticacaoDto.senha());
-        System.out.println("depois de gerar o usuario");
 
-        System.out.println("antes da autenticacao");
         var auth = authenticationManager.authenticate(usuarioEmailSenha);
-        System.out.println("depois da autenticacao");
 
         var token = jwtToken.gerarToken((UserDetailsSecurity) auth.getPrincipal());
 

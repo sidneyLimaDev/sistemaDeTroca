@@ -1,9 +1,9 @@
-package com.unicap.renovo.services;
+package com.unicap.sistemaTroca.services;
 
-import com.unicap.renovo.exceptions.ObjetoNaoEncontradoException;
-import com.unicap.renovo.models.Ong;
-import com.unicap.renovo.repositories.EnderecoRepositorio;
-import com.unicap.renovo.repositories.OngRepository;
+import com.unicap.sistemaTroca.exceptions.ObjetoNaoEncontradoException;
+import com.unicap.sistemaTroca.models.Ong;
+import com.unicap.sistemaTroca.repositories.EnderecoRepositorio;
+import com.unicap.sistemaTroca.repositories.OngRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

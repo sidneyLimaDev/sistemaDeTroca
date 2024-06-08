@@ -10,19 +10,16 @@ public record EnderecoDto(
         String cep,
 
         @NotBlank
-        String rua,
+        String logradouro,
 
         @NotBlank
         String bairro,
 
         @NotBlank
-        String cidade,
+        String localidade,
 
         @NotBlank
-        String estado,
-
-        @NotBlank
-        String pais,
+        String uf,
 
         Integer numero
 ) {

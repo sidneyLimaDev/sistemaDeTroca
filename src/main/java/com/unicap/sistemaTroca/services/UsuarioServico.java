@@ -33,6 +33,16 @@ public class UsuarioServico {
         return usuarioDao.findAll();
     }
 
+    public List<Usuario> buscarUsuariosPorNome(String nome) {
+        List<Usuario> usuarios = usuarioDao.buscarPorNome(nome);
+
+        if(usuarios.isEmpty()) {
+            throw new ObjetoNaoEncontradoException("Não foi possível encontrar usuário(s) com o nome [" + nome + "]");
+        }
+
+        return usuarios;
+    }
+
     public void deletarUsuario(Long id) {
         try {
             usuarioDao.deleteById(id);
